@@ -16,10 +16,13 @@ typedef struct {
 } HashTable;
 
 void ht_init(HashTable *ht);
+
 void ht_destroy(HashTable *ht);
 
 int ht_insert(HashTable *ht, const char *key, int value);
+
 int ht_get(const HashTable *ht, const char *key, int *value);
+
 int ht_delete(HashTable *ht, const char *key);
 
 void ht_print(const HashTable *ht);
