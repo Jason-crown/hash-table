@@ -5,19 +5,22 @@ TARGET = hash_table
 
 OBJS = main.o hashtable.o
 
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
+SRC = main.c hashtable.c
 
-main.o: main.c hashtable.h
-	$(CC) $(CFLAGS) -c main.c
+OBJ = $(SRC:.c=.o)
 
-hashtable.o: hashtable.c hashtable.h
-	$(CC) $(CFLAGS) -c hashtable.c
 
-clean:
-	del $(OBJS) $(TARGET)
+$(TARGET): $(OBJ)
+	$(CC) $(OBJ) -o $(TARGET)
+
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 
 run: $(TARGET)
 	.\$(TARGET).exe
 
-.PHONY: clean
+
+clean:
+	del /Q *.o $(TARGET).exe 2>NUL
